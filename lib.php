@@ -96,7 +96,7 @@ function get_user_id($username) {
 function sign_in($username, $password) {
 	$db = open_database();	
 	
-	$statement = $db->prepare('SELECT * FROM users WHERE username = :username AND pwd = :password');
+	$statement = $db->prepare('SELECT * FROM users WHERE username = :username AND password = :password');
 	$statement->bindValue(':username', $username);
 	$statement->bindValue(':password', $password);
 
