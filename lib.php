@@ -116,7 +116,7 @@ function sign_in($username, $password) {
 		return NULL;
 	}
 
-	fullname = $resultArray['fullname'];
+	$fullname = $resultArray['fullname'];
 	
 	$token = build_token($username, $fullname);
 
