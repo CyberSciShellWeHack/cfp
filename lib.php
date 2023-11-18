@@ -35,7 +35,7 @@ function build_token($username, $fullname) {
 	$to_sign = $username . ":" . $fullname . ":" . $nonce;
 
 	// Sign the token so that it can't be forged
-	$signature = hash_hmac('sha256', $to_sign, '');
+	$signature = hash_hmac('sha256', $to_sign, 'IASJDIAJ9DSJ9ADJ9AJDJA29DJA2');
 
 	$arr = array('username' => $username, 'fullname' => $fullname, 'nonce' => $nonce, 'signature' => $signature);
 
