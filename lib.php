@@ -21,7 +21,7 @@ function decode_token($token) {
 		$to_check = $arr['username'] . ":" . $arr['fullname'] . ":" . $arr['nonce'];
 
 		// Verify the signature
-		if ($arr['signature'] === hash_hmac('sha256', $to_check, '')) {
+		if ($arr['signature'] === hash_hmac('sha256', $to_check, 'IASJDIAJ9DSJ9ADJ9AJDJA29DJA2')) {
 			return $arr;
 		}
 	}
