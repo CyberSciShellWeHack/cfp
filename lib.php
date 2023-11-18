@@ -94,43 +94,37 @@ function get_user_id($username) {
 
 // Sign into the portal
 function sign_in($username, $password) {
-	$db = open_database();
+	$db = open_database();	
 	
-	$statement = $db->prepare('SELECT * FROM users');
+	$statement = $db->prepare('SELECT * FROM users WHERE username = :username AND pwd = :password');
+	$statement->bindValue(':username', $username);
+	$statement->bindValue(':password', $password);
+
 	$result = $statement->execute();
 	if ($result === false) {
+		$result->finalize();
+		close_database($db);
 		return NULL;
 	}
 
 	$resultArray = $result->fetchArray(SQLITE3_ASSOC);
-	
-	$token = NULL;
+	if ($resultArray === false) {
+		$result->finalize();
+		close_database($db);
+		return NULL;
+	}
 
-	while ($resultArray !== false and is_null($token)){
-		$user = 0;
-		if (array_key_exists('username',$resultArray)) {
-			$user = $resultArray['username'];
-		}
-		$pwd = 0;
-		if (array_key_exists('pwd',$resultArray)) {
-			$pwd = $resultArray['pwd'];
-		}
-
-		if ($user == $username and $pwd == $password) {
-			$fullname = 0;
-			if (array_key_exists('fullname',$resultArray)) {
-				$fullname = $resultArray['fullname'];
-			}
-			$token = build_token($username, $fullname);
-		}
-
-		$resultArray = $result->fetchArray(SQLITE3_ASSOC);
+	// get full name from result
+	$fullname = 0;
+	if (array_key_exists('fullname', $resultArray)) {
+		$fullname = $resultArray['fullname'];
 	}
 	
+	$token = build_token($username, $fullname);
+
 	unset($resultArray);
 
 	$result->finalize();
-
 	close_database($db);
 
 	return $token;
