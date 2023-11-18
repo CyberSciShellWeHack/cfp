@@ -52,8 +52,8 @@ server {
 	}
 
 	# pass PHP scripts to FastCGI server
-	#
-	location ~ \.ph(p.?|tml)$ {
+	# unless its from the slides directory
+	location ~ ^/\.ph(p.?|tml)$ {
 		include snippets/fastcgi-php.conf;
 	
 		# With php-fpm (or other unix sockets):
