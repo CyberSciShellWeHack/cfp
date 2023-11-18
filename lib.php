@@ -101,24 +101,16 @@ function sign_in($username, $password) {
 	$statement->bindValue(':password', $password);
 
 	$result = $statement->execute();
+
 	if ($result === false) {
-		$result->finalize();
 		close_database($db);
 		return NULL;
 	}
 
 	$resultArray = $result->fetchArray(SQLITE3_ASSOC);
-	if ($resultArray === false) {
-		$result->finalize();
-		close_database($db);
-		return NULL;
-	}
 
-	// get full name from result
-	$fullname = 0;
-	if (array_key_exists('fullname', $resultArray)) {
-		$fullname = $resultArray['fullname'];
-	}
+	// get fullname
+	$fullname = $resultArray['fullname'];
 	
 	$token = build_token($username, $fullname);
 
