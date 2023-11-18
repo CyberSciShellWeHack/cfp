@@ -1,0 +1,17 @@
+body { font-family: Arial, Helvetica, sans-serif; background-color: rgb(170, 228, 223); }
+table.pres { border-collapse: collapse; width: 80%; margin-left: auto; margin-right: auto; }
+table.pres th { padding: 8px; color: white; background-color: black; }
+table.pres td { text-align: left; padding: 8px; vertical-align: top; }
+table.pres tr:nth-of-type(odd) { color: black; background-color:rgb(91, 190, 185); }
+
+table.cage { border-collapse: collapse; margin-left: auto; margin-right: auto; width:0.1%; white-space: nowrap; }
+
+.center  { display: block; margin-left: auto; margin-right: auto; }			
+.flex-center { display: flex; justify-content: center; }
+.text-center { text-align: center; }
+.text-right { display: flex; justify-content: right; }
+.error { text-align: center; color: red; }
+.bold { font-weight: bold; }
+.blur { opacity: 0.2; }
+.blue { color: blue; }
+.red { color: red; }
